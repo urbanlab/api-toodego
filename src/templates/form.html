@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Execution</title>
+</head>
+<body>
+    <h1>API Execution</h1>
+    <form id="apiForm">
+        <label for="apiUrl">Mot de passe</label><br>
+        <input type="password" id="password" name="apiUrl"><br>
+        <label for="formId">Identifiant du formulaire:</label><br>
+        <input type="text" id="formId" name="formId"><br>
+        <button type="submit">Exécuter API</button>
+    </form>
+    <div id="result">
+
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        // on click on submit get the value of the input and
+        const formId = document.getElementById('formId');
+        const password = document.getElementById('password');
+
+        // on submit fetch {{baseUrl}}?password={{password}}&formId={{formId}}
+        document.getElementById('apiForm').addEventListener('submit', function(e) {
+            // inject Chargement... dans le div result
+            document.getElementById('result').innerHTML = 'Chargement...';
+            e.preventDefault();
+            fetch(`/?password=${password.value}&formId=${formId.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+                });
+        });
+
+    </script>
+</body>
+</html>
