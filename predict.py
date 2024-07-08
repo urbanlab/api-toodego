@@ -146,7 +146,7 @@ class Predictor(BasePredictor):
         authToken: str = Input(description="Auth Token"),
     ) -> dict:
         if authToken != AUTH_TOKEN:
-            return "Invalid auth token"
+            return {"error": "Invalid auth token"}
         """Run a single prediction on the model"""
 
         api_url=f"{apiUrl}/{formSlug}/{formId}"        
